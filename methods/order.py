@@ -1,5 +1,6 @@
 import requests
 import json
+from urls import *
 
 
 def create_order_with_specific_color(first_color=None, second_color=None):
@@ -34,8 +35,7 @@ def create_order_with_specific_color(first_color=None, second_color=None):
         "color": color
     }
     headers = {'Content-Type': 'application/json'}
-    response = requests.post(
-        'https://qa-scooter.praktikum-services.ru/api/v1/orders', json=payload, headers=headers)
+    response = requests.post(order_url, json=payload, headers=headers)
 
     if response.status_code == 201:
         return json.loads(response._content)['track']
@@ -44,8 +44,7 @@ def create_order_with_specific_color(first_color=None, second_color=None):
 
 
 def get_one_order_from_list_with_first_metro_station():
-    response = requests.get(
-        'https://qa-scooter.praktikum-services.ru/api/v1/orders?limit=5&page=0&nearestStation=["1"]')
+    response = requests.get(order_with_filters_url)
     if response.status_code == 200:
         return json.loads(response._content)['orders']
     else:

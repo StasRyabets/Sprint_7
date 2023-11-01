@@ -1,6 +1,7 @@
 import requests
 import random
 import string
+from urls import reg_url
 
 
 def generate_random_string(length):
@@ -19,8 +20,7 @@ def register_new_courier_return_credentials_or_response(param=None):
         "password": password,
         "firstName": first_name
     }
-    response = requests.post(
-        'https://qa-scooter.praktikum-services.ru/api/v1/courier', data=payload)
+    response = requests.post(reg_url, data=payload)
 
     if response.status_code == 201 and param == 'credentials':
         login_pass = []
@@ -44,10 +44,8 @@ def register_using_same_credentials():
         "firstName": first_name
     }
 
-    requests.post(
-        'https://qa-scooter.praktikum-services.ru/api/v1/courier', data=payload)
-    response = requests.post(
-        'https://qa-scooter.praktikum-services.ru/api/v1/courier', data=payload)
+    requests.post(reg_url, data=payload)
+    response = requests.post(reg_url, data=payload)
     return response.text
 
 
@@ -67,8 +65,7 @@ def register_new_courier_without_required_attribute(attribute=None):
             "firstName": first_name
         }
 
-    response = requests.post(
-        'https://qa-scooter.praktikum-services.ru/api/v1/courier', data=payload)
+    response = requests.post(reg_url, data=payload)
     return response.text
 
 
@@ -91,6 +88,5 @@ def register_new_courier_with_specific_data(login=None, password=None, first_nam
         "firstName": first_name
     }
 
-    response = requests.post(
-        'https://qa-scooter.praktikum-services.ru/api/v1/courier', data=payload)
+    response = requests.post(reg_url, data=payload)
     return response.text

@@ -2,6 +2,7 @@ import pytest
 import allure
 from methods.registration import *
 from methods.login import *
+from data import Login
 
 
 def test_successful_login():
@@ -20,7 +21,7 @@ def test_successful_login():
 )
 def test_login_without_required_attribute(login, password):
     assert login_user(
-        login, password) == '{"code":400,"message":"Недостаточно данных для входа"}'
+        login, password) == Login.response_400
 
 
 @pytest.mark.parametrize(
@@ -35,8 +36,9 @@ def test_login_with_typo(chars_remove_from_login, chars_remove_from_password):
     password = generate_random_string(9)
     register_new_courier_with_specific_data(login, password)
     if chars_remove_from_login == 0:
-        assert login_user(login, password[:-chars_remove_from_password]
-                          ) == '{"code":404,"message":"Учетная запись не найдена"}'
+        login_with_typo = login_user(
+            login, password[:-chars_remove_from_password])
     elif chars_remove_from_password == 0:
-        assert login_user(login[:-chars_remove_from_login],
-                          password) == '{"code":404,"message":"Учетная запись не найдена"}'
+        login_with_typo = login_user(
+            login[:-chars_remove_from_login], password)
+    assert login_with_typo == Login.response_404
