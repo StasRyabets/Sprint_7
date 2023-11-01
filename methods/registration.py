@@ -10,7 +10,7 @@ def generate_random_string(length):
     return random_string
 
 
-def register_new_courier_return_credentials_or_response(param=None):
+def register_new_courier_return_credentials_or_response():
     login = generate_random_string(10)
     password = generate_random_string(10)
     first_name = generate_random_string(10)
@@ -21,16 +21,7 @@ def register_new_courier_return_credentials_or_response(param=None):
         "firstName": first_name
     }
     response = requests.post(reg_url, data=payload)
-
-    if response.status_code == 201 and param == 'credentials':
-        login_pass = []
-        login_pass.append(login)
-        login_pass.append(password)
-        login_pass.append(first_name)
-        return login_pass
-
-    else:
-        return response.text
+    return response.text
 
 
 def register_using_same_credentials():
@@ -70,7 +61,6 @@ def register_new_courier_without_required_attribute(attribute=None):
 
 
 def register_new_courier_with_specific_data(login=None, password=None, first_name=None):
-    login_pass = []
     if login == None:
         login = generate_random_string(10)
 
@@ -79,9 +69,6 @@ def register_new_courier_with_specific_data(login=None, password=None, first_nam
 
     if first_name == None:
         first_name = generate_random_string(10)
-    login_pass.append(login)
-    login_pass.append(password)
-    login_pass.append(first_name)
     payload = {
         "login": login,
         "password": password,
