@@ -42,6 +42,7 @@ def create_order_with_specific_color(first_color=None, second_color=None):
     else:
         return response.text
 
+
 def get_one_order_from_list_with_first_metro_station():
     response = requests.get(
         'https://qa-scooter.praktikum-services.ru/api/v1/orders?limit=5&page=0&nearestStation=["1"]')
@@ -49,7 +50,3 @@ def get_one_order_from_list_with_first_metro_station():
         return json.loads(response._content)['orders']
     else:
         return response.text
-    
-# print(get_one_order_from_list_with_first_metro_station())
-
-# print(create_order_with_specific_color())

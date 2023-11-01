@@ -94,7 +94,3 @@ def register_new_courier_with_specific_data(login=None, password=None, first_nam
     response = requests.post(
         'https://qa-scooter.praktikum-services.ru/api/v1/courier', data=payload)
     return response.text
-
-# print(register_new_courier_return_credentials_or_response())
-
-# register_new_courier_with_specific_data('stanislavchik', '12345')
