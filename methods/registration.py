@@ -10,7 +10,7 @@ def generate_random_string(length):
     return random_string
 
 
-def register_new_courier_return_credentials_or_response():
+def register_new_courier():
     login = generate_random_string(10)
     password = generate_random_string(10)
     first_name = generate_random_string(10)
