@@ -38,7 +38,7 @@ def create_order_with_specific_color(first_color=None, second_color=None):
     response = requests.post(order_url, json=payload, headers=headers)
 
     if response.status_code == 201:
-        return json.loads(response._content)['track']
+        return json.loads(response.content)['track']
     else:
         return response.text
 
@@ -46,6 +46,6 @@ def create_order_with_specific_color(first_color=None, second_color=None):
 def get_one_order_from_list_with_first_metro_station():
     response = requests.get(order_with_filters_url)
     if response.status_code == 200:
-        return json.loads(response._content)['orders']
+        return json.loads(response.content)['orders']
     else:
         return response.text
