@@ -12,6 +12,6 @@ def login_user(login='', password=''):
     response = requests.post(login_url, data=payload)
 
     if response.status_code == 200:
-        return json.loads(response._content)['id']
+        return json.loads(response.content)['id']
     else:
         return response.text
